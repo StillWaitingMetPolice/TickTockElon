@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waiting for a Warrant</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #f0f0f0;
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      font-weight: normal;
+      color: #aaa;
+      max-width: 640px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    h1 strong {
+      color: #fff;
+    }
+
+    #clock {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .value {
+      font-size: clamp(3rem, 12vw, 7rem);
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+      color: #c00;
+      line-height: 1;
+      min-width: 2ch;
+      text-align: center;
+    }
+
+    .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #666;
+      margin-top: 0.4rem;
+    }
+
+    .since {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    Time elapsed waiting for British authorities to issue an<br>
+    <strong>international arrest warrant for Elon Musk</strong><br>
+    for incitement to violence in the United Kingdom
+  </h1>
+
+  <div id="clock">
+    <div class="unit"><span class="value" id="days">0</span><span class="label">Days</span></div>
+    <div class="unit"><span class="value" id="hours">00</span><span class="label">Hours</span></div>
+    <div class="unit"><span class="value" id="minutes">00</span><span class="label">Minutes</span></div>
+    <div class="unit"><span class="value" id="seconds">00</span><span class="label">Seconds</span></div>
+  </div>
+
+  <p class="since">Started: 11 June 2026, 09:00 BST</p>
+
+  <script>
+    // 11 June 2026, 09:00:00 BST = 08:00:00 UTC
+    const start = new Date('2026-06-11T08:00:00Z').getTime();
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      const elapsed = Math.max(0, Date.now() - start);
+      const totalSeconds = Math.floor(elapsed / 1000);
+      const days    = Math.floor(totalSeconds / 86400);
+      const hours   = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById('days').textContent    = days;
+      document.getElementById('hours').textContent   = pad(hours);
+      document.getElementById('minutes').textContent = pad(minutes);
+      document.getElementById('seconds').textContent = pad(seconds);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>
